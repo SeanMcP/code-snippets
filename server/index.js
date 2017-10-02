@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 const config = require('./config/main');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // Start the server
 const server = app.listen(config.port);
@@ -18,4 +20,11 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
   res.header("Access-Control-Allow-Credentials", "true");
   next();
+});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Database Connection
+var promise = mongoose.connect(config.database, {
+  useMongoClient: true
 });
