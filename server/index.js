@@ -5,6 +5,7 @@ const logger = require('morgan');
 const config = require('./config/main');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const router = require('./router');
 
 // Start the server
 const server = app.listen(config.port);
@@ -28,3 +29,5 @@ app.use(bodyParser.json());
 var promise = mongoose.connect(config.database, {
   useMongoClient: true
 });
+
+// router(app);
