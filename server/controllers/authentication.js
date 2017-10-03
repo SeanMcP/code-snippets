@@ -64,7 +64,7 @@ exports.register = function(req, res, next) {
         name: 'Junior Sniplet'
       });
 
-      User.save(function(err, user) {
+      user.save(function(err, user) {
         if (err) { return next(err); }
 
         // Respond with JWT if user was created

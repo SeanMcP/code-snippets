@@ -11,6 +11,7 @@ module.exports = function(app) {
   // Initializing route groups
   const apiRoutes = express.Router();
   const authRoutes = express.Router();
+  const router = express.Router();
 
   //=========================
   // Auth Routes
@@ -21,6 +22,12 @@ module.exports = function(app) {
 
   // Registration route
   authRoutes.post('/register', AuthenticationController.register);
+
+  // Testing
+  apiRoutes.get('/', () => res.send('Hello from apiRoutes!'));
+  authRoutes.get('/', () => res.send('Hello from authRoutes!'));
+  router.get('/', () => res.send('Hello from router!'))
+
 
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);

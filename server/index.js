@@ -30,4 +30,4 @@ var promise = mongoose.connect(config.database, {
   useMongoClient: true
 });
 
-// router(app);
+router(app);
