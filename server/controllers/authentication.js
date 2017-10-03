@@ -10,11 +10,11 @@ function generateToken(user) {
 }
 
 // Set user info from request
-function setUserInfo(request) {
+function setUserInfo(req) {
   return {
-    _id: request._id,
-    name: request.name,
-    email: request.email
+    _id: req._id,
+    name: req.name,
+    email: req.email
   };
 }
 
