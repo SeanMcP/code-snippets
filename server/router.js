@@ -34,6 +34,9 @@ module.exports = function(app) {
   // View snippets
   authRoutes.get('/snippet', AuthenticationController.getSnippets);
 
+  // Update snippet
+  authRoutes.put('/snippet/:snippetId', AuthenticationController.updateSnippet);
+
 // Set url for API group routes
   app.use('/api', apiRoutes);
 };

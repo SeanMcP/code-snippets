@@ -108,7 +108,7 @@ exports.delete = (req, res, next) => {
 // Create snippet route
 //========================================
 exports.createSnippet = (req, res, next) => {
-  let newUser = {
+  let newSnippet = {
     userId: req.body.userId,
     title: req.body.title,
     code: req.body.code,
@@ -116,13 +116,13 @@ exports.createSnippet = (req, res, next) => {
     language: req.body.language,
     tags: req.body.tags.split(', ')
   }
-  console.log('newUser: ', newUser);
-  Snippet.create(newUser)
-  .then(() => {
+  Snippet.create(newSnippet)
+  .then(data => {
+    // console.log('data', data);
     res.status(200).send({
       status: 'success',
       data: {
-        user: newUser
+        snippet: data
       }
     })
   })
@@ -147,6 +147,30 @@ exports.getSnippets = (req, res, next) => {
   })
   .catch(err => {
     res.status(400).send({
+      status: 'fail',
+      data: err
+    })
+  })
+}
+
+exports.updateSnippet = (req, res, next) => {
+  Snippet.updateOne({ _id: req.params.snippetId }, {
+    $set: {
+      title: req.body.title,
+      code: req.body.code,
+      notes: req.body.notes,
+      language: req.body.language,
+      tags: req.body.tags.split(', ')
+    }
+  })
+  .then(data => {
+    res.status(200).send({
+      status: 'success',
+      data: data
+    })
+  })
+  .catch(err => {
+    res.status(404).send({
       status: 'fail',
       data: err
     })

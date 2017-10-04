@@ -72,6 +72,8 @@ describe('DELETE /api/auth/user/:id', () => {
 // Create/manage snippets
 //=========================
 
+let snippetId;
+
 describe('POST /api/auth/snippet', () => {
   test('Should create a snippet for example user', () => {
     return request(app)
@@ -89,19 +91,24 @@ describe('POST /api/auth/snippet', () => {
         expect(res.body).toHaveProperty('status')
         expect(res.body.status).toBe('success')
         expect(res.body).toHaveProperty('data')
-        expect(res.body.data).toHaveProperty('user')
-        expect(res.body.data.user).toHaveProperty('userId')
-        expect(res.body.data.user.userId).toBe('59d4edeb4e0288f57323e904')
-        expect(res.body.data.user).toHaveProperty('title')
-        expect(res.body.data.user.title).toBe('Title')
-        expect(res.body.data.user).toHaveProperty('code')
-        expect(res.body.data.user.code).toBe('Code')
-        expect(res.body.data.user).toHaveProperty('notes')
-        expect(res.body.data.user.notes).toBe('Notes')
-        expect(res.body.data.user).toHaveProperty('language')
-        expect(res.body.data.user.language).toBe('Language')
-        expect(res.body.data.user).toHaveProperty('tags')
-        expect(res.body.data.user.tags).toEqual(['Tag1', 'Tag2', 'Tag3'])
+        expect(res.body.data).toHaveProperty('snippet')
+        expect(res.body.data.snippet).toHaveProperty('userId')
+        expect(res.body.data.snippet.userId).toBe('59d4edeb4e0288f57323e904')
+        expect(res.body.data.snippet).toHaveProperty('title')
+        expect(res.body.data.snippet.title).toBe('Title')
+        expect(res.body.data.snippet).toHaveProperty('code')
+        expect(res.body.data.snippet.code).toBe('Code')
+        expect(res.body.data.snippet).toHaveProperty('notes')
+        expect(res.body.data.snippet.notes).toBe('Notes')
+        expect(res.body.data.snippet).toHaveProperty('language')
+        expect(res.body.data.snippet.language).toBe('Language')
+        expect(res.body.data.snippet).toHaveProperty('tags')
+        expect(res.body.data.snippet.tags).toEqual(['Tag1', 'Tag2', 'Tag3'])
+        expect(res.body.data.snippet).toHaveProperty('_id')
+        expect(res.body.data.snippet._id).toBeTruthy()
+        expect(res.body.data.snippet).toHaveProperty('__v')
+        expect(res.body.data.snippet.__v).toBeGreaterThanOrEqual(0)
+        snippetId = res.body.data.snippet._id;
       })
   })
 })
@@ -116,6 +123,32 @@ describe('GET /api/auth/snippet', () => {
         expect(res.body.status).toBe('success')
         expect(res.body).toHaveProperty('data')
         expect(res.body.data).toBeTruthy()
+      })
+  })
+})
+
+describe('PUT /api/auth/snippet/:snippetId', () => {
+  test('Should update snippet with :snippetId', () => {
+    return request(app)
+      .put(`/api/auth/snippet/${snippetId}`)
+      .expect(200)
+      .send({
+        title: 'Updated title',
+        code: 'Updated code',
+        notes: 'Updated notes',
+        language: 'Updated language',
+        tags: 'New-tag1, New-tag2, New-tag3'
+      })
+      .then(res => {
+        expect(res.body).toHaveProperty('status')
+        expect(res.body.status).toBe('success')
+        expect(res.body).toHaveProperty('data')
+        expect(res.body.data).toHaveProperty('n')
+        expect(res.body.data.n).toBe(1)
+        expect(res.body.data).toHaveProperty('nModified')
+        expect(res.body.data.nModified).toBe(1)
+        expect(res.body.data).toHaveProperty('ok')
+        expect(res.body.data.ok).toBe(1)
       })
   })
 })
