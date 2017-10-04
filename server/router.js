@@ -31,6 +31,9 @@ module.exports = function(app) {
   // Create snippet
   authRoutes.post('/snippet', AuthenticationController.createSnippet);
 
+  // View snippets
+  authRoutes.get('/snippet', AuthenticationController.getSnippets);
+
 // Set url for API group routes
   app.use('/api', apiRoutes);
 };
