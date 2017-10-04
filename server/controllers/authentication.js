@@ -87,10 +87,10 @@ exports.delete = (req, res, next) => {
   // console.log('req.user: ', req.user);
   // if (req.user._id === req.params.id) {
     User.deleteOne({ _id: req.params.id })
-    .then(() => {
+    .then(data => {
       res.status(200).send({
         status: 'success',
-        data: 'User successfully deleted'
+        data: data
       });
     })
     .catch(err => {
@@ -174,5 +174,21 @@ exports.updateSnippet = (req, res, next) => {
       status: 'fail',
       data: err
     })
+  })
+}
+
+exports.deleteSnippet = (req, res, next) => {
+  Snippet.deleteOne({ _id: req.params.snippetId })
+  .then(data => {
+    res.status(200).send({
+      status: 'success',
+      data: data
+    });
+  })
+  .catch(err => {
+    res.status(400).send({
+      status: 'fail',
+      data: err
+    });
   })
 }

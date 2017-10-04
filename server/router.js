@@ -37,6 +37,9 @@ module.exports = function(app) {
   // Update snippet
   authRoutes.put('/snippet/:snippetId', AuthenticationController.updateSnippet);
 
+  // Delete snippet
+  authRoutes.delete('/snippet/:snippetId', AuthenticationController.deleteSnippet);
+
 // Set url for API group routes
   app.use('/api', apiRoutes);
 };
