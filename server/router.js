@@ -25,6 +25,9 @@ module.exports = function(app) {
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
+  // Delete route
+  authRoutes.delete('/user/:id', /*requireAuth,*/ AuthenticationController.delete);
+
 // Set url for API group routes
   app.use('/api', apiRoutes);
 };

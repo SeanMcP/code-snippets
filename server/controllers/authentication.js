@@ -77,3 +77,29 @@ exports.register = function(req, res, next) {
       });
   });
 }
+
+//========================================
+// Delete Route
+//========================================
+
+exports.delete = (req, res, next) => {
+  // let userInfo = setUserInfo(req.user);
+  // console.log('req.user: ', req.user);
+  // if (req.user._id === req.params.id) {
+    User.deleteOne({ _id: req.params.id })
+    .then(() => {
+      res.status(200).send({
+        status: 'success',
+        data: 'User successfully deleted'
+      });
+    })
+    .catch(err => {
+      res.status(404).send({
+        status: 'fail',
+        data: 'No user deleted'
+      });
+    })
+  // } else {
+  //   res.status(400).send('Bad kitty');
+  // }
+}
