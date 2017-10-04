@@ -82,7 +82,6 @@ exports.register = function(req, res, next) {
 //========================================
 // Delete Route
 //========================================
-
 exports.delete = (req, res, next) => {
   // let userInfo = setUserInfo(req.user);
   // console.log('req.user: ', req.user);
@@ -103,4 +102,34 @@ exports.delete = (req, res, next) => {
   // } else {
   //   res.status(400).send('Bad kitty');
   // }
+}
+
+//========================================
+// Create snippet route
+//========================================
+exports.createSnippet = (req, res, next) => {
+  let newUser = {
+    userId: req.body.userId,
+    title: req.body.title,
+    code: req.body.code,
+    notes: req.body.notes,
+    language: req.body.language,
+    tags: req.body.tags.split(', ')
+  }
+  console.log('newUser: ', newUser);
+  Snippet.create(newUser)
+  .then(() => {
+    res.status(200).send({
+      status: 'success',
+      data: {
+        user: newUser
+      }
+    })
+  })
+  .catch(err => {
+    res.status(404).send({
+      status: 'fail',
+      data: err
+    })
+  })
 }

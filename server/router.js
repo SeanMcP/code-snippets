@@ -28,6 +28,9 @@ module.exports = function(app) {
   // Delete route
   authRoutes.delete('/user/:id', /*requireAuth,*/ AuthenticationController.delete);
 
+  // Create snippet
+  authRoutes.post('/snippet', AuthenticationController.createSnippet);
+
 // Set url for API group routes
   app.use('/api', apiRoutes);
 };

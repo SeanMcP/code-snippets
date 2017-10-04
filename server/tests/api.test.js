@@ -71,3 +71,37 @@ describe('DELETE /api/auth/user/:id', () => {
 //=========================
 // Create/manage snippets
 //=========================
+
+describe('POST /api/auth/snippet', () => {
+  test('Should create a snippet for example user', () => {
+    return request(app)
+      .post('/api/auth/snippet')
+      .expect(200)
+      .send({
+        userId: '59d4edeb4e0288f57323e904',
+        title: 'Title',
+        code: 'Code',
+        notes: 'Notes',
+        language: 'Language',
+        tags: 'Tag1, Tag2, Tag3'
+      })
+      .then(res => {
+        expect(res.body).toHaveProperty('status')
+        expect(res.body.status).toBe('success')
+        expect(res.body).toHaveProperty('data')
+        expect(res.body.data).toHaveProperty('user')
+        expect(res.body.data.user).toHaveProperty('userId')
+        expect(res.body.data.user.userId).toBe('59d4edeb4e0288f57323e904')
+        expect(res.body.data.user).toHaveProperty('title')
+        expect(res.body.data.user.title).toBe('Title')
+        expect(res.body.data.user).toHaveProperty('code')
+        expect(res.body.data.user.code).toBe('Code')
+        expect(res.body.data.user).toHaveProperty('notes')
+        expect(res.body.data.user.notes).toBe('Notes')
+        expect(res.body.data.user).toHaveProperty('language')
+        expect(res.body.data.user.language).toBe('Language')
+        expect(res.body.data.user).toHaveProperty('tags')
+        expect(res.body.data.user.tags).toEqual(['Tag1', 'Tag2', 'Tag3'])
+      })
+  })
+})
