@@ -1,6 +1,10 @@
 const request = require('supertest');
 const app = require('../index');
 
+//=========================
+// Create/manage users
+//=========================
+
 let createdUserId;
 
 describe('POST /api/auth/register', () => {
@@ -63,3 +67,7 @@ describe('DELETE /api/auth/user/:id', () => {
       })
   })
 })
+
+//=========================
+// Create/manage snippets
+//=========================
