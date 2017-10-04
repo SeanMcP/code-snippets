@@ -82,7 +82,7 @@ exports.register = function(req, res, next) {
 //========================================
 // Delete Route
 //========================================
-exports.delete = (req, res, next) => {
+exports.deleteUser = (req, res, next) => {
   // let userInfo = setUserInfo(req.user);
   // console.log('req.user: ', req.user);
   // if (req.user._id === req.params.id) {

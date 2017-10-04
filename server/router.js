@@ -26,7 +26,7 @@ module.exports = function(app) {
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
   // Delete route
-  authRoutes.delete('/user/:id', /*requireAuth,*/ AuthenticationController.delete);
+  authRoutes.delete('/user/:id', /*requireAuth,*/ AuthenticationController.deleteUser);
 
   // Create snippet
   authRoutes.post('/snippet', AuthenticationController.createSnippet);

@@ -50,26 +50,26 @@ describe('POST /api/auth/login', () => {
   })
 })
 
-describe('DELETE /api/auth/user/:id', () => {
-  test('Should delete recently created user', () => {
-    return request(app)
-      .delete(`/api/auth/user/${createdUserId}`)
-      .expect(200)
-      // .send({
-      //   email: 'test@test.test',
-      //   password: 'testytesttest'
-      // })
-      .then(res => {
-        expect(res.body).toHaveProperty('status')
-        expect(res.body.status).toBe('success')
-        expect(res.body).toHaveProperty('data')
-        expect(res.body.data).toHaveProperty('n')
-        expect(res.body.data.n).toBe(1)
-        expect(res.body.data).toHaveProperty('ok')
-        expect(res.body.data.ok).toBe(1)
-      })
-  })
-})
+// describe('DELETE /api/auth/user/:id', () => {
+//   test('Should delete recently created user', () => {
+//     return request(app)
+//       .delete(`/api/auth/user/${createdUserId}`)
+//       .expect(200)
+//       // .send({
+//       //   email: 'test@test.test',
+//       //   password: 'testytesttest'
+//       // })
+//       .then(res => {
+//         expect(res.body).toHaveProperty('status')
+//         expect(res.body.status).toBe('success')
+//         expect(res.body).toHaveProperty('data')
+//         expect(res.body.data).toHaveProperty('n')
+//         expect(res.body.data.n).toBe(1)
+//         expect(res.body.data).toHaveProperty('ok')
+//         expect(res.body.data.ok).toBe(1)
+//       })
+//   })
+// })
 
 //=========================
 // Create/manage snippets
@@ -83,7 +83,7 @@ describe('POST /api/auth/snippet', () => {
       .post('/api/auth/snippet')
       .expect(200)
       .send({
-        userId: '59d4edeb4e0288f57323e904',
+        userId: createdUserId,
         title: 'Title',
         code: 'Code',
         notes: 'Notes',
@@ -96,7 +96,7 @@ describe('POST /api/auth/snippet', () => {
         expect(res.body).toHaveProperty('data')
         expect(res.body.data).toHaveProperty('snippet')
         expect(res.body.data.snippet).toHaveProperty('userId')
-        expect(res.body.data.snippet.userId).toBe('59d4edeb4e0288f57323e904')
+        expect(res.body.data.snippet.userId).toBe(createdUserId)
         expect(res.body.data.snippet).toHaveProperty('title')
         expect(res.body.data.snippet.title).toBe('Title')
         expect(res.body.data.snippet).toHaveProperty('code')
@@ -161,6 +161,31 @@ describe('DELETE /api/auth/snippet/:snippetId', () => {
     return request(app)
       .delete(`/api/auth/snippet/${snippetId}`)
       .expect(200)
+      .then(res => {
+        expect(res.body).toHaveProperty('status')
+        expect(res.body.status).toBe('success')
+        expect(res.body).toHaveProperty('data')
+        expect(res.body.data).toHaveProperty('n')
+        expect(res.body.data.n).toBe(1)
+        expect(res.body.data).toHaveProperty('ok')
+        expect(res.body.data.ok).toBe(1)
+      })
+  })
+})
+
+//=========================
+// Delete User
+//=========================
+
+describe('DELETE /api/auth/user/:id', () => {
+  test('Should delete recently created user', () => {
+    return request(app)
+      .delete(`/api/auth/user/${createdUserId}`)
+      .expect(200)
+      // .send({
+      //   email: 'test@test.test',
+      //   password: 'testytesttest'
+      // })
       .then(res => {
         expect(res.body).toHaveProperty('status')
         expect(res.body.status).toBe('success')
