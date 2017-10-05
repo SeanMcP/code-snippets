@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
+// import 'bootstrap';
 
 import BaseLayout from './components/BaseLayout';
 import ViewAll from './containers/ViewAll';
@@ -19,9 +21,13 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <BaseLayout>
-      <ViewAll />
-    </BaseLayout>
+    <BrowserRouter>
+      <BaseLayout>
+        <Switch>
+          <Route path='/' component={ViewAll} />
+        </Switch>
+      </BaseLayout>
+    </BrowserRouter>
   </Provider>
   , document.getElementById('root'));
 registerServiceWorker();

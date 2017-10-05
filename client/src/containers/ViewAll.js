@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { storeSnippets, fetchSnippets }  from '../actions';
+import { fetchSnippets }  from '../actions';
 import { bindActionCreators } from 'redux';
 
 class ViewAll extends Component {
@@ -13,7 +13,6 @@ class ViewAll extends Component {
   render() {
     console.log('this.props on ViewAll:', this.props);
     this.props.fetchSnippets()
-    console.log('this.state after fetch', this.state);
     // let renderSnippets = this.state.snippets.data.map(snippet => {
     //   return (
     //     <div key={snippet._id}>
@@ -35,9 +34,7 @@ class ViewAll extends Component {
 
 function mapStateToProps(state) {
   console.log('state on ViewAll:', state);
-  return {
-    // query: ''
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
