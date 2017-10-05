@@ -4,11 +4,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-import BaseLayout from './components/BaseLayout';
+import BaseLayout from './containers/BaseLayout';
 import ViewAll from './containers/ViewAll';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Profile from './components/Profile';
+import Login from './containers/Login';
+import Signup from './containers/Signup';
+import Profile from './containers/Profile';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
