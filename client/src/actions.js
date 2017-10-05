@@ -18,3 +18,11 @@ export const fetchSnippets = () => {
       })
   }
 }
+
+export const postSignup = () => {
+  let form = new FormData(document.getElementById('searchForm'));
+  fetch('http://localhost:3030/api/auth/register', {
+    method: 'POST',
+    body: form
+  })
+}
