@@ -14,7 +14,7 @@ export const fetchSnippets = () => {
         return response.json();
       })
       .then(data => {
-        dispatch(storeSnippets(data));
+        dispatch(storeSnippets(data.data));
       })
   }
 }
